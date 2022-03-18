@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "299905773162",
+    "project_id": "age-calculator-8a6ce",
+    "storage_bucket": "age-calculator-8a6ce.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:299905773162:android:65da6a1693e727e4bda413",
+        "android_client_info": {
+          "package_name": "com.yar.age_calculator"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "299905773162-0t6fsq3fg3cn55rrsjk57apsb73qc2ne.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD0_W7-Z11ZzPZCsKreNGBoYpHT3qG25gE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "299905773162-0t6fsq3fg3cn55rrsjk57apsb73qc2ne.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

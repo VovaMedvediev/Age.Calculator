@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>299905773162-8ttql65l5pke1pmnhisbuncueca4klr4.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.299905773162-8ttql65l5pke1pmnhisbuncueca4klr4</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBXhzVIULQbVhkG7AkdK1ZcsjsqA4ZlxZk</string>
+	<key>GCM_SENDER_ID</key>
+	<string>299905773162</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.yar.app.ageCalculator</string>
+	<key>PROJECT_ID</key>
+	<string>age-calculator-8a6ce</string>
+	<key>STORAGE_BUCKET</key>
+	<string>age-calculator-8a6ce.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:299905773162:ios:132d3ac9a5327773bda413</string>
+</dict>
+</plist>
