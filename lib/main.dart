@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'input_data_page.dart';
+
 void main() {
   runApp(const AgeCalculator());
 }
@@ -27,11 +29,8 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(leading: const Text('Age Calculator')),
-      body: const Center(
-    child: Text('test text')
-    )
-    ,
+      appBar: AppBar(title: Text('Age Calculator')),
+      body: InputDataPage()
     );
   }
 }
