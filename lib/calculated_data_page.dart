@@ -12,11 +12,21 @@ class CalculatedDataPage extends StatefulWidget {
 class _CalculatedDataPageState extends State<CalculatedDataPage> {
   @override
   Widget build(BuildContext context) {
-    // final calculatedDifferenceState =
-    //     context.read<InputDataBloc>().state as CalculatedDifference;
-    return const Material(
-        child: Center(child: Text('work in progres...')
-        // Text(calculatedDifferenceState.difference),
-        ));
+    return Material(
+      child: BlocBuilder<InputDataBloc, InputDataStates>(
+          bloc: BlocProvider.of(context),
+          builder: (context, state) {
+            print('state $state');
+            if (state is CalculatedDifferenceState) {
+              return Center(child: Column(
+                children: [
+                  Text('${state.difference}'),
+                ],
+              ));
+            } else {
+              return const Center(child: Text('Unknown error'));
+            }
+          }),
+    );
   }
 }

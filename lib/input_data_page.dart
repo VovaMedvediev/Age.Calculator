@@ -15,52 +15,54 @@ class _InputDataPageState extends State<InputDataPage> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<InputDataBloc>(
-        create: (BuildContext context) => _bloc,
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            children: [
-              const SizedBox(height: 15),
-              BlocBuilder<InputDataBloc, InputDataStates>(
-                  bloc: _bloc,
-                  builder: (context, state) {
-                    print('state $state');
-                    if (state is InputDataInitialState) {
-                      return Column(children: [
-                        datePick(Constants.fromDateNameString,
-                            DateTime(Constants.defaultDate)),
-                        const SizedBox(height: 15),
-                        datePick(Constants.toDateNameString, state.lastDate),
-                      ]);
-                    } else if (state is PickedDateState) {
-                      return Column(children: [
-                        datePick(Constants.fromDateNameString, state.dateOfBirth),
-                        const SizedBox(height: 15),
-                        datePick(Constants.toDateNameString, state.lastDate),
-                      ]);
-                    } else {
-                      return const Text('Unknown error');
-                    }
-                  }),
-              const SizedBox(height: 15),
-              ElevatedButton(
-                onPressed: () {
-                  if (_bloc.dateOfBirth != DateTime(0000)) {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const CalculatedDataPage()));
-                    _bloc.calculateAge();
-                  } else {
-                    showPicker(Constants.fromDateNameString);
-                  }
-                },
-                child: const Text('Calculate Age'),
-              )
-            ],
-          ),
-        ));
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Column(
+        children: [
+          const SizedBox(height: 15),
+          BlocBuilder<InputDataBloc, InputDataStates>(
+              bloc: _bloc,
+              builder: (context, state) {
+                print('state $state');
+                if (state is InputDataInitialState) {
+                  return Column(children: [
+                    datePick(Constants.fromDateNameString,
+                        DateTime(Constants.defaultDate)),
+                    const SizedBox(height: 15),
+                    datePick(Constants.toDateNameString, state.lastDate),
+                  ]);
+                } else if (state is PickedDateState) {
+                  return Column(children: [
+                    datePick(
+                        Constants.fromDateNameString, state.dateOfBirth),
+                    const SizedBox(height: 15),
+                    datePick(Constants.toDateNameString, state.lastDate),
+                  ]);
+                } else {
+                  return const Text('Unknown error');
+                }
+              }),
+          const SizedBox(height: 15),
+          ElevatedButton(
+            onPressed: () {
+              if (_bloc.dateOfBirth != DateTime(0000)) {
+                _bloc.calculateAge();
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (_) => BlocProvider.value(
+                              value: _bloc,
+                              child: CalculatedDataPage(),
+                            )));
+              } else {
+                showPicker(Constants.fromDateNameString);
+              }
+            },
+            child: const Text('Calculate Age'),
+          )
+        ],
+      ),
+    );
   }
 
   Widget datePick(String widgetName, DateTime pick) {

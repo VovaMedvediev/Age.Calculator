@@ -4,8 +4,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class InputDataBloc extends Cubit<InputDataStates> {
   InputDataBloc(_) : super(InputDataInitialState());
-  DateTime dateOfBirth= DateTime(Constants.defaultDate);
+  DateTime dateOfBirth = DateTime(Constants.defaultDate);
   DateTime lastDate = DateTime.now();
+  int? differenceInSeconds;
 
   void addFirstDateOfBirthEvent(DateTime date) {
     print('date $date');
@@ -13,6 +14,7 @@ class InputDataBloc extends Cubit<InputDataStates> {
     emit(PickedDateState(dateOfBirth, lastDate));
     print('date2 $date');
   }
+
   void addSecondDateOfBirthEvent(DateTime date) {
     print('lastdate $date');
     lastDate = date;
@@ -20,19 +22,20 @@ class InputDataBloc extends Cubit<InputDataStates> {
     print('lastdate2 $date');
   }
 
-  void calculateAge(){
-    double differenceInDays = lastDate.difference(dateOfBirth).inHours / 24;
-    int years = (differenceInDays/365).round();
-    print('calculated ${differenceInDays}, full years $years');
+  void calculateAge() {
+    differenceInSeconds = lastDate.difference(dateOfBirth).inSeconds;
+    double years = (differenceInSeconds! / 365 / 3600 / 24);
+    double months = (years - years.floor()) * 12;
+    double days = (months - months.floor()) * 30;
+    print('calculated ${differenceInSeconds}, full years $years, months $months, days $days');
+    emit(CalculatedDifferenceState(differenceInSeconds));
   }
-
 }
 
 abstract class InputDataStates extends Equatable {}
 
 class InputDataInitialState extends InputDataStates {
   final DateTime lastDate = DateTime.now();
-
   InputDataInitialState();
   @override
   List<Object?> get props => [];
@@ -43,14 +46,15 @@ class PickedDateState extends InputDataStates {
 
   final DateTime dateOfBirth;
   final DateTime lastDate;
+
   @override
   List<Object?> get props => [dateOfBirth, lastDate];
 }
-class CalculatedDifference extends InputDataStates {
-  CalculatedDifference(this.difference);
+
+class CalculatedDifferenceState extends InputDataStates {
+  CalculatedDifferenceState(this.difference);
 
   @override
-  List<Object?> get props => [];
+  List<Object?> get props => [difference];
   final difference;
-
 }
