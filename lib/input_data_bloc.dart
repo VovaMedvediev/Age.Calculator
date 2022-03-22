@@ -24,11 +24,13 @@ class InputDataBloc extends Cubit<InputDataStates> {
 
   void calculateAge() {
     differenceInSeconds = lastDate.difference(dateOfBirth).inSeconds;
-    double years = (differenceInSeconds! / 365 / 3600 / 24);
-    double months = (years - years.floor()) * 12;
-    double days = (months - months.floor()) * 30;
-    print('calculated ${differenceInSeconds}, full years $years, months $months, days $days');
-    emit(CalculatedDifferenceState(differenceInSeconds));
+    final years = (differenceInSeconds! / 365 / 3600 / 24);
+    final months = (years - years.floor()) * 12;
+    final days = (months - months.floor()) * 30;
+    print(
+        'calculated ${differenceInSeconds}, full years $years, months $months, days $days');
+    emit(CalculatedDifferenceState(
+        differenceInSeconds, years.floor(), months.floor(), days.floor()));
   }
 }
 
@@ -36,7 +38,9 @@ abstract class InputDataStates extends Equatable {}
 
 class InputDataInitialState extends InputDataStates {
   final DateTime lastDate = DateTime.now();
+
   InputDataInitialState();
+
   @override
   List<Object?> get props => [];
 }
@@ -52,9 +56,14 @@ class PickedDateState extends InputDataStates {
 }
 
 class CalculatedDifferenceState extends InputDataStates {
-  CalculatedDifferenceState(this.difference);
+  final difference;
+  final int years;
+  final int months;
+  final int days;
+
+  CalculatedDifferenceState(
+      this.difference, this.years, this.months, this.days);
 
   @override
   List<Object?> get props => [difference];
-  final difference;
 }

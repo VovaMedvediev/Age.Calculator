@@ -18,9 +18,14 @@ class _CalculatedDataPageState extends State<CalculatedDataPage> {
           builder: (context, state) {
             print('state $state');
             if (state is CalculatedDifferenceState) {
-              return Center(child: Column(
+              return Center(
+                  child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text('${state.difference}'),
+                  Text(
+                      'You have been living ${state.difference} seconds from the birthdate'),
+                  Text(
+                      'Your age is: ${state.years} years old, ${state.months} months, ${state.days} days'),
                 ],
               ));
             } else {

@@ -1,9 +1,8 @@
-import 'package:age_calculator/calculated_data_page.dart';
-import 'package:age_calculator/constants.dart';
+import 'calculated_data_page.dart';
+import 'constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'input_data_bloc.dart';
-import 'constants.dart';
 
 class InputDataPage extends StatefulWidget {
   @override
@@ -26,15 +25,27 @@ class _InputDataPageState extends State<InputDataPage> {
                 print('state $state');
                 if (state is InputDataInitialState) {
                   return Column(children: [
-                    DatePick(widgetName: Constants.fromDateNameString,pick: DateTime(Constants.defaultDate), bloc: _bloc),
+                    DatePick(
+                        widgetName: Constants.fromDateNameString,
+                        pick: DateTime(Constants.defaultDate),
+                        bloc: _bloc),
                     const SizedBox(height: 15),
-                    DatePick(widgetName: Constants.toDateNameString, pick: state.lastDate, bloc: _bloc),
+                    DatePick(
+                        widgetName: Constants.toDateNameString,
+                        pick: state.lastDate,
+                        bloc: _bloc),
                   ]);
                 } else if (state is PickedDateState) {
                   return Column(children: [
-                    DatePick(widgetName: Constants.fromDateNameString, pick: state.dateOfBirth, bloc: _bloc),
+                    DatePick(
+                        widgetName: Constants.fromDateNameString,
+                        pick: state.dateOfBirth,
+                        bloc: _bloc),
                     const SizedBox(height: 15),
-                    DatePick(widgetName: Constants.toDateNameString, pick: state.lastDate, bloc: _bloc),
+                    DatePick(
+                        widgetName: Constants.toDateNameString,
+                        pick: state.lastDate,
+                        bloc: _bloc),
                   ]);
                 } else {
                   return const Text('Unknown error');
@@ -56,8 +67,9 @@ class _InputDataPageState extends State<InputDataPage> {
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
                     content: const Text('Fill in the From date field!'),
-                    ),
-                );              }
+                  ),
+                );
+              }
             },
             child: const Text('Calculate Age'),
           )
@@ -67,14 +79,14 @@ class _InputDataPageState extends State<InputDataPage> {
   }
 }
 
-
 class DatePick extends StatelessWidget {
-  const DatePick({ required this.widgetName, required this.pick, required this.bloc});
+  const DatePick(
+      {required this.widgetName, required this.pick, required this.bloc});
 
   final String widgetName;
   final DateTime pick;
   final InputDataBloc bloc;
-  
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -117,7 +129,6 @@ class DatePick extends StatelessWidget {
     );
   }
 
-
   Future<DateTime?> _showPicker(BuildContext context, String widgetName) {
     return showDatePicker(
         context: context,
@@ -128,5 +139,3 @@ class DatePick extends StatelessWidget {
         lastDate: DateTime(2100));
   }
 }
-
-
