@@ -26,17 +26,15 @@ class _InputDataPageState extends State<InputDataPage> {
                 print('state $state');
                 if (state is InputDataInitialState) {
                   return Column(children: [
-                    datePick(Constants.fromDateNameString,
-                        DateTime(Constants.defaultDate)),
+                    DatePick(widgetName: Constants.fromDateNameString,pick: DateTime(Constants.defaultDate), bloc: _bloc),
                     const SizedBox(height: 15),
-                    datePick(Constants.toDateNameString, state.lastDate),
+                    DatePick(widgetName: Constants.toDateNameString, pick: state.lastDate, bloc: _bloc),
                   ]);
                 } else if (state is PickedDateState) {
                   return Column(children: [
-                    datePick(
-                        Constants.fromDateNameString, state.dateOfBirth),
+                    DatePick(widgetName: Constants.fromDateNameString, pick: state.dateOfBirth, bloc: _bloc),
                     const SizedBox(height: 15),
-                    datePick(Constants.toDateNameString, state.lastDate),
+                    DatePick(widgetName: Constants.toDateNameString, pick: state.lastDate, bloc: _bloc),
                   ]);
                 } else {
                   return const Text('Unknown error');
@@ -55,8 +53,11 @@ class _InputDataPageState extends State<InputDataPage> {
                               child: CalculatedDataPage(),
                             )));
               } else {
-                showPicker(Constants.fromDateNameString);
-              }
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: const Text('Fill in the From date field!'),
+                    ),
+                );              }
             },
             child: const Text('Calculate Age'),
           )
@@ -64,8 +65,18 @@ class _InputDataPageState extends State<InputDataPage> {
       ),
     );
   }
+}
 
-  Widget datePick(String widgetName, DateTime pick) {
+
+class DatePick extends StatelessWidget {
+  const DatePick({ required this.widgetName, required this.pick, required this.bloc});
+
+  final String widgetName;
+  final DateTime pick;
+  final InputDataBloc bloc;
+  
+  @override
+  Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -87,11 +98,11 @@ class _InputDataPageState extends State<InputDataPage> {
                 ),
                 InkWell(
                     onTap: () {
-                      showPicker(widgetName).then((date) {
+                      _showPicker(context, widgetName).then((date) {
                         if (widgetName == Constants.fromDateNameString) {
-                          _bloc.addFirstDateOfBirthEvent(date!);
+                          bloc.addFirstDateOfBirthEvent(date!);
                         } else if (widgetName == Constants.toDateNameString) {
-                          _bloc.addSecondDateOfBirthEvent(date!);
+                          bloc.addSecondDateOfBirthEvent(date!);
                         }
                       });
                     },
@@ -106,7 +117,8 @@ class _InputDataPageState extends State<InputDataPage> {
     );
   }
 
-  Future<DateTime?> showPicker(String widgetName) {
+
+  Future<DateTime?> _showPicker(BuildContext context, String widgetName) {
     return showDatePicker(
         context: context,
         initialDate: widgetName == 'Date of Birth (From)'
@@ -116,3 +128,5 @@ class _InputDataPageState extends State<InputDataPage> {
         lastDate: DateTime(2100));
   }
 }
+
+
