@@ -1,4 +1,4 @@
-import 'package:age_calculator/constants.dart';
+import 'constants.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -39,8 +39,6 @@ abstract class InputDataStates extends Equatable {}
 class InputDataInitialState extends InputDataStates {
   final DateTime lastDate = DateTime.now();
 
-  InputDataInitialState();
-
   @override
   List<Object?> get props => [];
 }
@@ -62,7 +60,8 @@ class CalculatedDifferenceState extends InputDataStates {
   final int days;
 
   CalculatedDifferenceState(
-      this.difference, this.years, this.months, this.days);
+      this.difference, this.years, this.months, this.days) {
+  }
 
   @override
   List<Object?> get props => [difference];

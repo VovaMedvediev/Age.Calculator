@@ -23,13 +23,13 @@ class _CalculatedDataPageState extends State<CalculatedDataPage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                      'You have been living ${state.difference} seconds from the birthdate'),
+                      'You have been living ${state.difference} seconds from the birth'),
                   Text(
                       'Your age is: ${state.years} years old, ${state.months} months, ${state.days} days'),
                 ],
               ));
             } else {
-              return const Center(child: Text('Unknown error'));
+              return const Center(child: Text('Unknown error2'));
             }
           }),
     );
