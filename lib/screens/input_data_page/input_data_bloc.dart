@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'age_model.dart';
-import 'constants.dart' as constants;
+import '../../age_model.dart';
+import '../../constants.dart' as constants;
 
 class InputDataBloc extends Cubit<InputDataStates> {
   InputDataBloc() : super(InputDataInitialState());

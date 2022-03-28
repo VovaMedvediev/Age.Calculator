@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'age_model.dart';
+import '../../age_model.dart';
 
 class CalculatedBloc extends Cubit<CalculatedStates> {
   CalculatedBloc(AgeModel ageModel) : super(InitState()){

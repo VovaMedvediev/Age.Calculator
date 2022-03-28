@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'age_model.dart';
+import '../../age_model.dart';
 import 'calculated_bloc.dart';
 
 class CalculatedDataPage extends StatefulWidget {
