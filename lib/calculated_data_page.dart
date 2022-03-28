@@ -29,8 +29,9 @@ class _CalculatedDataPageState extends State<CalculatedDataPage> {
                   Text('You have been living ${state.age.differenceInSeconds} '
                       'seconds from the birth',),
                   Text(
-                    'Your age is: ${state.age.years} years old, '
-                    '${state.age.months} months, ${state.age.days} days',
+                    'Your age is: ${state.age.years.floor()} years, '
+                    '${state.age.months.floor()} months, '
+                        '${state.age.days.floor()} days old',
                   )
                 ],
               ),);
