@@ -1,16 +1,14 @@
-import 'calculated_data_page.dart';
-import 'constants.dart' as Constants;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'age_model.dart';
+import 'calculated_data_page.dart';
+import 'constants.dart' as constants;
 import 'input_data_bloc.dart';
 
-class InputDataPage extends StatefulWidget {
-  @override
-  State<InputDataPage> createState() => _InputDataPageState();
-}
-
-class _InputDataPageState extends State<InputDataPage> {
-  final InputDataBloc _bloc = InputDataBloc(InputDataInitialState());
+class InputDataPage extends StatelessWidget {
+  InputDataPage({Key? key}) : super(key: key);
+  final AgeModel ageModel = AgeModel(DateTime(0000), DateTime.now());
+  final InputDataBloc _bloc = InputDataBloc();
 
   @override
   Widget build(BuildContext context) {
@@ -20,49 +18,53 @@ class _InputDataPageState extends State<InputDataPage> {
         children: [
           const SizedBox(height: 15),
           BlocBuilder<InputDataBloc, InputDataStates>(
-              bloc: _bloc,
-              builder: (context, state) {
-                print('state $state');
-                if (state is InputDataInitialState) {
-                  return Column(children: [
+            bloc: _bloc,
+            builder: (context, state) {
+              print('state $state');
+              if (state is InputDataInitialState) {
+                return Column(
+                  children: [
                     DatePick(
-                        widgetName: Constants.fromDateNameString,
-                        pick: DateTime(Constants.defaultDate),
-                        bloc: _bloc),
+                      widgetName: constants.fromDateNameString,
+                      bloc: _bloc,
+                    ),
                     const SizedBox(height: 15),
                     DatePick(
-                        widgetName: Constants.toDateNameString,
-                        pick: state.lastDate,
-                        bloc: _bloc),
-                  ]);
-                } else if (state is PickedDateState) {
-                  return Column(children: [
+                      widgetName: constants.toDateNameString,
+                      bloc: _bloc,
+                    ),
+                  ],
+                );
+              } else if (state is PickedDateState) {
+                print('age ${state.age.birthDate} ${state.age.toDate}');
+                return Column(
+                  children: [
                     DatePick(
-                        widgetName: Constants.fromDateNameString,
-                        pick: state.dateOfBirth,
-                        bloc: _bloc),
+                      widgetName: constants.fromDateNameString,
+                      bloc: _bloc,
+                    ),
                     const SizedBox(height: 15),
                     DatePick(
-                        widgetName: Constants.toDateNameString,
-                        pick: state.lastDate,
-                        bloc: _bloc),
-                  ]);
-                } else {
-                  return const Text('Unknown error');
-                }
-              }),
+                      widgetName: constants.toDateNameString,
+                      bloc: _bloc,
+                    ),
+                  ],
+                );
+              } else {
+                return const Text('Unknown error');
+              }
+            },
+          ),
           const SizedBox(height: 15),
           ElevatedButton(
             onPressed: () {
-              if (_bloc.dateOfBirth != DateTime(0000)) {
-                _bloc.calculateAge();
+              if (_bloc.ageModel.birthDate != DateTime(0000)) {
                 Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (_) => BlocProvider.value(
-                              value: _bloc,
-                              child: CalculatedDataPage(),
-                            )));
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => CalculatedDataPage(_bloc.ageModel),
+                  ),
+                );
               } else {
                 ScaffoldMessenger.of(context).showSnackBar(
                   const SnackBar(
@@ -80,11 +82,9 @@ class _InputDataPageState extends State<InputDataPage> {
 }
 
 class DatePick extends StatelessWidget {
-  const DatePick(
-      {required this.widgetName, required this.pick, required this.bloc});
+  const DatePick({required this.widgetName, required this.bloc});
 
   final String widgetName;
-  final DateTime pick;
   final InputDataBloc bloc;
 
   @override
@@ -96,7 +96,6 @@ class DatePick extends StatelessWidget {
         Container(
           decoration: BoxDecoration(
             border: Border.all(
-              color: Colors.black,
               width: 3,
             ),
             borderRadius: BorderRadius.circular(12),
@@ -109,18 +108,26 @@ class DatePick extends StatelessWidget {
                   width: 25,
                 ),
                 InkWell(
-                    onTap: () {
-                      _showPicker(context, widgetName).then((date) {
-                        if (widgetName == Constants.fromDateNameString) {
-                          bloc.addFirstDateOfBirthEvent(date!);
-                        } else if (widgetName == Constants.toDateNameString) {
-                          bloc.addSecondDateOfBirthEvent(date!);
-                        }
-                      });
-                    },
-                    child: Text(pick == DateTime(Constants.defaultDate)
-                        ? 'Pick up a date'
-                        : pick.toString())),
+                  onTap: () {
+                    _showPicker(context, widgetName).then((date) {
+                      if (widgetName == constants.fromDateNameString) {
+                        bloc.ageModel.birthDate = date!;
+                      } else {
+                        bloc.ageModel.toDate = date!;
+                      }
+                      print(
+                        'after showpicker ${bloc.ageModel.birthDate}'
+                        ' ${bloc.ageModel.toDate}',
+                      );
+                      bloc.addDateEvent();
+                    });
+                  },
+                  child: Text(
+                    widgetName == constants.fromDateNameString
+                        ? bloc.ageModel.birthDate.toString()
+                        : bloc.ageModel.toDate.toString(),
+                  ),
+                ),
               ],
             ),
           ),
@@ -131,11 +138,12 @@ class DatePick extends StatelessWidget {
 
   Future<DateTime?> _showPicker(BuildContext context, String widgetName) {
     return showDatePicker(
-        context: context,
-        initialDate: widgetName == 'Date of Birth (From)'
-            ? DateTime.utc(2000)
-            : DateTime.now(),
-        firstDate: DateTime(1900),
-        lastDate: DateTime(2100));
+      context: context,
+      initialDate: widgetName == constants.fromDateNameString
+          ? DateTime(2000)
+          : DateTime.now(),
+      firstDate: DateTime(1900),
+      lastDate: DateTime(2100),
+    );
   }
 }
