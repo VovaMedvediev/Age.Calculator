@@ -1,10 +1,10 @@
-import 'constants.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'constants.dart' as constants;
 
 class InputDataBloc extends Cubit<InputDataStates> {
   InputDataBloc(_) : super(InputDataInitialState());
-  DateTime dateOfBirth = DateTime(Constants.defaultDate);
+  DateTime dateOfBirth = DateTime(constants.defaultDate);
   DateTime lastDate = DateTime.now();
   int? differenceInSeconds;
 
@@ -24,7 +24,7 @@ class InputDataBloc extends Cubit<InputDataStates> {
 
   void calculateAge() {
     differenceInSeconds = lastDate.difference(dateOfBirth).inSeconds;
-    final years = (differenceInSeconds! / 365 / 3600 / 24);
+    final years = differenceInSeconds! / 365 / 3600 / 24;
     final months = (years - years.floor()) * 12;
     final days = (months - months.floor()) * 30;
     print(
@@ -60,8 +60,7 @@ class CalculatedDifferenceState extends InputDataStates {
   final int days;
 
   CalculatedDifferenceState(
-      this.difference, this.years, this.months, this.days) {
-  }
+      this.difference, this.years, this.months, this.days) {}
 
   @override
   List<Object?> get props => [difference];

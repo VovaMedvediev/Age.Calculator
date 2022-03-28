@@ -1,5 +1,5 @@
 import 'calculated_data_page.dart';
-import 'constants.dart';
+import 'constants.dart' as Constants;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'input_data_bloc.dart';
@@ -65,8 +65,8 @@ class _InputDataPageState extends State<InputDataPage> {
                             )));
               } else {
                 ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content: const Text('Fill in the From date field!'),
+                  const SnackBar(
+                    content: Text('Fill in the From date field!'),
                   ),
                 );
               }
