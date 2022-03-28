@@ -36,7 +36,7 @@ class _CalculatedDataPageState extends State<CalculatedDataPage> {
                 ],
               ),);
             } else {
-              return const Center(child: Text('Unknown error2'));
+              return const Center(child: Text('Unknown error'));
             }
           },
         ),

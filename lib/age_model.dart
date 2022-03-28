@@ -3,10 +3,10 @@ class AgeModel {
 
   DateTime birthDate;
   DateTime toDate;
-  late final int differenceInSeconds;
-  late final double years;
-  late final double months;
-  late final double days;
+  late int differenceInSeconds;
+  late double years;
+  late double months;
+  late double days;
 
   void getCalculated() {
     differenceInSeconds = toDate.difference(birthDate).inSeconds;
