@@ -8,7 +8,7 @@ class AgeModel {
   late final double months;
   late final double days;
 
-  getCalculated() {
+  void getCalculated() {
     differenceInSeconds = toDate.difference(birthDate).inSeconds;
     years = differenceInSeconds / 365 / 3600 / 24;
     months = (years - years.floor()) * 12;

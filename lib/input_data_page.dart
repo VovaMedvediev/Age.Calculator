@@ -20,7 +20,6 @@ class InputDataPage extends StatelessWidget {
           BlocBuilder<InputDataBloc, InputDataStates>(
             bloc: _bloc,
             builder: (context, state) {
-              print('state $state');
               if (state is InputDataInitialState) {
                 return Column(
                   children: [
@@ -36,7 +35,6 @@ class InputDataPage extends StatelessWidget {
                   ],
                 );
               } else if (state is PickedDateState) {
-                print('age ${state.age.birthDate} ${state.age.toDate}');
                 return Column(
                   children: [
                     DatePick(
@@ -115,10 +113,6 @@ class DatePick extends StatelessWidget {
                       } else {
                         bloc.ageModel.toDate = date!;
                       }
-                      print(
-                        'after showpicker ${bloc.ageModel.birthDate}'
-                        ' ${bloc.ageModel.toDate}',
-                      );
                       bloc.addDateEvent();
                     });
                   },

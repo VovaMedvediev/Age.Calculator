@@ -14,8 +14,6 @@ class CalculatedDataPage extends StatefulWidget {
 class _CalculatedDataPageState extends State<CalculatedDataPage> {
   @override
   Widget build(BuildContext context) {
-    print(
-        'fromSecondPage ${widget.ageModel.birthDate} ${widget.ageModel.toDate}');
     return Material(
       child: BlocProvider<CalculatedBloc>(
         lazy: false,
@@ -23,20 +21,19 @@ class _CalculatedDataPageState extends State<CalculatedDataPage> {
         child: BlocBuilder<CalculatedBloc, CalculatedStates>(
           // bloc: BlocProvider.of<CalculatedBloc>(context),
           builder: (context, state) {
-            print('state $state');
             if (state is CalculatedDifferenceState) {
               return Center(
                   child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text('You have been living ${state.age.differenceInSeconds} '
-                      'seconds from the birth'),
+                      'seconds from the birth',),
                   Text(
                     'Your age is: ${state.age.years} years old, '
                     '${state.age.months} months, ${state.age.days} days',
                   )
                 ],
-              ));
+              ),);
             } else {
               return const Center(child: Text('Unknown error2'));
             }
