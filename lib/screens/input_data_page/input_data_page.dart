@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../age_model.dart';
+import '/age_model.dart';
+import '/constants.dart' as constants;
+import '/date_pick_widget.dart';
 import '../calculated_page/calculated_data_page.dart';
-import '../../constants.dart' as constants;
-import '../../date_pick_widget.dart';
 import 'input_data_bloc.dart';
 
 class InputDataPage extends StatelessWidget {
   InputDataPage({Key? key}) : super(key: key);
-  final AgeModel ageModel = AgeModel(DateTime(0000), DateTime.now());
+  final AgeModel ageModel = AgeModel(DateTime(constants.defaultDate), DateTime.now());
   final InputDataBloc _bloc = InputDataBloc();
 
   @override
@@ -36,6 +36,7 @@ class InputDataPage extends StatelessWidget {
                   ],
                 );
               } else if (state is PickedDateState) {
+                print('state ${state.ageModel.birthDate} ${state.ageModel.toDate}');
                 return Column(
                   children: [
                     DatePick(
@@ -57,7 +58,7 @@ class InputDataPage extends StatelessWidget {
           const SizedBox(height: 15),
           ElevatedButton(
             onPressed: () {
-              if (_bloc.ageModel.birthDate != DateTime(0000)) {
+              if (_bloc.ageModel.birthDate != DateTime(constants.defaultDate)) {
                 Navigator.push(
                   context,
                   MaterialPageRoute(

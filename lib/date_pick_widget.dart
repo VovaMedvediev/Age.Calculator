@@ -37,7 +37,10 @@ class DatePick extends StatelessWidget {
                       } else {
                         bloc.ageModel.toDate = date!;
                       }
-                      bloc.addDateEvent();
+                      bloc.addDateEvent(bloc.ageModel);
+                      print(
+                          'date_pick_widget ${bloc.ageModel.birthDate}'
+                              ' ${bloc.ageModel.toDate}');
                     });
                   },
                   child: Text(
