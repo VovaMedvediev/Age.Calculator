@@ -8,19 +8,28 @@ class InputDataBloc extends Cubit<InputDataStates> {
 
   void addDateEvent(AgeModel ageModel) {
     emit(PickedDateState(ageModel));
-    print('age model ${ageModel.birthDate} ${ageModel.toDate}');
+  }
+
+  String getTextDate(String widgetName) {
+    String textDate;
+    if (widgetName == constants.fromDateNameString) {
+      textDate = ageModel.birthDate.toString();
+    } else {
+      textDate = ageModel.toDate.toString();
+    }
+    if (textDate == DateTime(constants.defaultDate).toString()) {
+      textDate = 'Pick up a date';
+    }
+    return textDate;
   }
 }
 
 abstract class InputDataStates {}
 
-class InputDataInitialState extends InputDataStates {
-
-}
+class InputDataInitialState extends InputDataStates {}
 
 class PickedDateState extends InputDataStates {
   PickedDateState(this.ageModel);
 
   final AgeModel ageModel;
-
 }

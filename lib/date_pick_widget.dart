@@ -31,6 +31,8 @@ class DatePick extends StatelessWidget {
                 ),
                 InkWell(
                   onTap: () {
+                    if (widgetName == constants.fromDateNameString) {}
+
                     _showPicker(context, widgetName).then((date) {
                       if (widgetName == constants.fromDateNameString) {
                         bloc.ageModel.birthDate = date!;
@@ -38,15 +40,10 @@ class DatePick extends StatelessWidget {
                         bloc.ageModel.toDate = date!;
                       }
                       bloc.addDateEvent(bloc.ageModel);
-                      print(
-                          'date_pick_widget ${bloc.ageModel.birthDate}'
-                              ' ${bloc.ageModel.toDate}');
                     });
                   },
                   child: Text(
-                    widgetName == constants.fromDateNameString
-                        ? bloc.ageModel.birthDate.toString()
-                        : bloc.ageModel.toDate.toString(),
+                    bloc.getTextDate(widgetName),
                   ),
                 ),
               ],

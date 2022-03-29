@@ -8,7 +8,8 @@ import 'input_data_bloc.dart';
 
 class InputDataPage extends StatelessWidget {
   InputDataPage({Key? key}) : super(key: key);
-  final AgeModel ageModel = AgeModel(DateTime(constants.defaultDate), DateTime.now());
+  final AgeModel ageModel =
+      AgeModel(DateTime(constants.defaultDate), DateTime.now());
   final InputDataBloc _bloc = InputDataBloc();
 
   @override
@@ -36,7 +37,6 @@ class InputDataPage extends StatelessWidget {
                   ],
                 );
               } else if (state is PickedDateState) {
-                print('state ${state.ageModel.birthDate} ${state.ageModel.toDate}');
                 return Column(
                   children: [
                     DatePick(
