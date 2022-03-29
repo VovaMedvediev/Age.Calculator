@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'constants.dart' as constants;
-import 'screens/input_data_page/input_data_bloc.dart';
+import '../../constants.dart' as constants;
+import 'input_data_bloc.dart';
 
 class DatePick extends StatelessWidget {
   const DatePick({required this.widgetName, required this.bloc});

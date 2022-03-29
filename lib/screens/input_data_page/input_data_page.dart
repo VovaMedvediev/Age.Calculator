@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '/age_model.dart';
 import '/constants.dart' as constants;
-import '/date_pick_widget.dart';
 import '../calculated_page/calculated_data_page.dart';
+import 'date_pick_widget.dart';
 import 'input_data_bloc.dart';
 
 class InputDataPage extends StatelessWidget {
