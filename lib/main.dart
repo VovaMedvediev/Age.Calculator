@@ -1,7 +1,6 @@
-import 'package:age_calculator/home_page.dart';
 import 'package:flutter/material.dart';
-
-import 'input_data_page.dart';
+import 'package:permission_handler/permission_handler.dart';
+import 'screens/home_page/home_page.dart';
 
 void main() {
   runApp(const AgeCalculator());
@@ -18,4 +17,3 @@ class AgeCalculator extends StatelessWidget {
     );
   }
 }
-
