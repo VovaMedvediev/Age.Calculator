@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '/age_model.dart';
 import '/constants.dart' as constants;
 import '../calculated_page/calculated_data_page.dart';
 import 'date_pick_widget.dart';
@@ -8,8 +7,6 @@ import 'input_data_bloc.dart';
 
 class InputDataPage extends StatelessWidget {
   InputDataPage({Key? key}) : super(key: key);
-  final AgeModel ageModel =
-      AgeModel(DateTime(constants.defaultDate), DateTime.now());
   final InputDataBloc _bloc = InputDataBloc();
 
   @override
