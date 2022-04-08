@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import '../../constants.dart' as constants;
 import 'input_data_bloc.dart';
 
@@ -58,9 +57,9 @@ class DatePick extends StatelessWidget {
     return showDatePicker(
       context: context,
       initialDate: widgetName == constants.fromDateNameString
-          ? DateTime(2000)
+          ? bloc.ageModel.birthDate
           : DateTime.now(),
-      firstDate: DateTime(1900),
+      firstDate: DateTime(0000),
       lastDate: DateTime(2100),
     );
   }
