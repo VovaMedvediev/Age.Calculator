@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import '../../constants.dart' as constants;
 import 'input_data_bloc.dart';
 
