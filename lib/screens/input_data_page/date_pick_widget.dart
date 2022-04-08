@@ -64,6 +64,4 @@ class DatePick extends StatelessWidget {
       lastDate: DateTime(2100),
     );
   }
-
-
 }
