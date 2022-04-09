@@ -8,7 +8,7 @@ class InputDataBloc extends Cubit<InputDataStates> {
   AgeModel ageModel = AgeModel(DateTime(constants.defaultDate), DateTime.now());
 
   void addDateEvent(AgeModel ageModel) {
-    List<AgeModel> listAge =[];
+    final listAge = <AgeModel>[];
     listAge.add(ageModel);
     emit(PickedDateState(List.of(listAge)));
   }
@@ -27,19 +27,20 @@ class InputDataBloc extends Cubit<InputDataStates> {
   }
 }
 
-abstract class InputDataStates extends Equatable
-{}
+abstract class InputDataStates extends Equatable {}
 
 class InputDataInitialState extends InputDataStates {
   @override
-  List<Object?> get props => [] ;
+  List<Object?> get props => [];
 }
 
 class PickedDateState extends InputDataStates {
   PickedDateState(this.listAge);
+
   final List<AgeModel> listAge;
+
   // final AgeModel ageModel;
 
   @override
-  List<Object?> get props => [listAge] ;
+  List<Object?> get props => [listAge];
 }
