@@ -1,3 +1,4 @@
+import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '/age_model.dart';
 import '/constants.dart' as constants;
@@ -7,7 +8,9 @@ class InputDataBloc extends Cubit<InputDataStates> {
   AgeModel ageModel = AgeModel(DateTime(constants.defaultDate), DateTime.now());
 
   void addDateEvent(AgeModel ageModel) {
-    emit(PickedDateState(ageModel));
+    final listAge = <AgeModel>[];
+    listAge.add(ageModel);
+    emit(PickedDateState(List.of(listAge)));
   }
 
   String getTextDate(String widgetName) {
@@ -24,12 +27,20 @@ class InputDataBloc extends Cubit<InputDataStates> {
   }
 }
 
-abstract class InputDataStates {}
+abstract class InputDataStates extends Equatable {}
 
-class InputDataInitialState extends InputDataStates {}
+class InputDataInitialState extends InputDataStates {
+  @override
+  List<Object?> get props => [];
+}
 
 class PickedDateState extends InputDataStates {
-  PickedDateState(this.ageModel);
+  PickedDateState(this.listAge);
 
-  final AgeModel ageModel;
+  final List<AgeModel> listAge;
+
+  // final AgeModel ageModel;
+
+  @override
+  List<Object?> get props => [listAge];
 }
